@@ -1,7 +1,6 @@
 import re
 import sys 
 import os
-
 import pandas as pd
 import numpy as np
 import spacy
@@ -9,6 +8,8 @@ from spacy.lang.en.stop_words import STOP_WORDS as stopwords
 from bs4 import BeautifulSoup
 import unicodedata
 from textblob import TextBlob
+
+nlp = spacy.load('en_core_web_sm')
 
 def _get_wordcounts(x):
 
@@ -51,7 +52,7 @@ def _get_uppercase_counts(x):
 
 	return len([t for t in x.split() if t.isupper()])
 
-def _get_cont_to_exp(x):
+def _cont_to_exp(x):
 
 	contractions = { 
 	"ain't": "am not",
@@ -212,7 +213,9 @@ def _make_base(x):
 	
 
 
-def _get_unique_words(x):
+def _get_unique_words(df,col):
+
+	x = ' '.join(df[col])
 	
 	text =  x.split()
 
@@ -220,17 +223,14 @@ def _get_unique_words(x):
 
 	return freq_comm 
 
-def _remove_common_words(x,n=20):
+def _remove_common_words(x,freq_comm,n=20):
 
-	freq_comm = _get_unique_words(x)
 
 	fn = freq_comm[:n]
 
 	return ' '.join([t for t in x.split() if t not in fn])
 
-def _remove_rare_words(x,n=20):
-
-	freq_comm = _get_unique_words(x)
+def _remove_rare_words(x,freq_comm,n=20):
 
 	fn = freq_comm.tail(n)
 
