@@ -1,6 +1,6 @@
 from preprocess_nlp import utils 
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 def get_wordcounts(x):
 
@@ -48,11 +48,11 @@ def remove_emails(x):
 
 def get_urls(x):
 
-	return utils._get_urls(x):
+	return utils._get_urls(x)
 
 def remove_rt(x):
 
-	return utils._remove_rt(x):
+	return utils._remove_rt(x)
 
 def remove_special_chars(x):
 
@@ -89,4 +89,4 @@ def remove_rare_words(x,n=20):
 
 def spelling_correction(x):
 
-	return utils._spelling_correction(x):
+	return utils._spelling_correction(x)
