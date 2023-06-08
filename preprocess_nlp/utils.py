@@ -24,7 +24,7 @@ def _get_charcounts(x):
 
 def _get_avg_wordlength(x):
 
-	count =_get_charcounts/_get_wordcounts
+	count =_get_charcounts(x)/_get_wordcounts(x)
 
 	return count
 
